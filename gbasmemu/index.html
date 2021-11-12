@@ -9,7 +9,8 @@
 	<body>
 		<div style="display:grid;grid-template-columns:auto auto;">
 			<div>
-				<pre><div class="language-gameboy" style="height:300px;width:90%;" id="input" contenteditable="true" onblur="syntax()">ld a, $03 ; This would be a comment</div></pre>
+				<pre><code class="language-gameboy" style="height:300px;width:90%;" id="input" contenteditable="true" onblur="syntax()">ld a, $03 ; This would be a comment
+assert eq a, $03</code></pre>
 				<button onclick="run_input();" style="width:90%;padding:10px;">Run</button>
 			</div>
 			<div><textarea id="output" style="height:200px;width:90%;resize:none;" disabled="disabled" wrap="off"></textarea></div>
