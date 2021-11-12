@@ -4,18 +4,16 @@
 		<meta charset="utf-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Game Boy Tester</title>
-		<link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github-dark.min.css" rel="stylesheet" />
 	</head>
 	<body>
 		<div style="display:grid;grid-template-columns:auto auto;">
 			<div>
-				<pre><code class="language-gameboy" style="height:300px;width:90%;" id="input" contenteditable="true" onblur="syntax()">ld a, $03 ; This would be a comment
-assert eq a, $03</code></pre>
+				<textarea id="input" style="height:300px;width:90%;resize:none;" placeholder="Assembly code..." wrap="off"></textarea>
+				<br/>
 				<button onclick="run_input();" style="width:90%;padding:10px;">Run</button>
 			</div>
 			<div><textarea id="output" style="height:200px;width:90%;resize:none;" disabled="disabled" wrap="off"></textarea></div>
 		</div>
-		
 		<script type="text/javascript">
 			var Module = {
 				print: (function() {
@@ -47,49 +45,9 @@ assert eq a, $03</code></pre>
 			function run_input() {
 				document.getElementById('output').value = "";
 				let input = document.getElementById('input')
-				let str = `\n${input.innerText}\n`;
+				let str = `\n${input.value}\n`;
 				run_code(str, "input.asm");
 			}
-			function syntax() {
-				let code = document.getElementById("input");
-				code.innerHTML = hljs.highlight(code.innerText, { language: "gameboy" }).value;
-			}
-		</script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-		<script type="text/javascript">
-			hljs.registerLanguage("gameboy", (function(hl){
-				let comment=hl.COMMENT(";", /$/);
-				return {
-					aliases: ["gameboy","dmg","z80"],
-					case_insensitive: true,
-					lexemes: "[a-z-]+",
-					
-					keywords: {
-						keyword: "nop ld inc dec rlca add rrca rla jr rra daa cpl scf ccf halt adc sub sbc and xor or cp ret pop jp call push rst reti di ldhl ei swap rlc rl rrc rr sla sra srl bit set res stop assert clocks",
-						//literal: ["a", "f", "b", "c", "d", "e", "h", "l", "af", "bc", "de", "hl"],
-						literal: ["eq", "neq", "leq", "geq", "lt", "gt"],
-					},
-					contains: [
-						comment,
-						{
-							className: "number",
-							begin: /\$\d/,
-							end: /$/,
-							excludeBegin: false,
-							relevance: 10,
-							contains: [comment]
-						}, {
-							className: "number",
-							begin: /\d/,
-							end: /$/,
-							excludeBegin: false,
-							relevance: 10,
-							contains: [comment]
-						}
-					]
-				}
-			}));
-			hljs.highlightElement(document.getElementById("input"));
 		</script>
 	</body>
 </html>
