@@ -8,11 +8,11 @@
 	<body>
 		<div style="display:grid;grid-template-columns:auto auto;">
 			<div>
-				<textarea id="input" style="height:300px;width:90%;"></textarea>
+				<textarea id="input" style="height:300px;width:90%;resize:none;" placeholder="Assembly code..."></textarea>
 				<br/>
 				<button onclick="run_input();" style="width:90%;padding:10px;">Run</button>
 			</div>
-			<div><textarea id="output" style="height:200px;width:90%;"></textarea></div>
+			<div><textarea id="output" style="height:200px;width:90%;resize:none;" disabled="disabled"></textarea></div>
 		</div>
 		<script type="text/javascript">
 			var Module = {
